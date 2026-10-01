@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura | Synthetic Media Forensics</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <main class="container">
+        <header>
+            <h1>Aura <span>Forensics</span></h1>
+            <p>Multi-modal verification platform to detect synthetic media, altered audio, and deepfakes.</p>
+        </header>
+
+        <section class="upload-section" id="uploadSection">
+            <div class="drop-zone" id="dropZone">
+                <div class="drop-content">
+                    <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                    </svg>
+                    <h3>Drag & Drop media here</h3>
+                    <p>Supports MP4, WAV, MP3 up to 50MB</p>
+                    <button class="btn-primary" onclick="document.getElementById('fileInput').click()">Browse Files</button>
+                    <input type="file" id="fileInput" hidden accept="video/*,audio/*">
+                </div>
+            </div>
+        </section>
+
+        <section class="analyzing-section hidden" id="analyzingSection">
+            <div class="scanner"></div>
+            <h3>Running Multi-modal Analysis...</h3>
+            <p class="status-text" id="statusText">Extracting frame-by-frame artifacts...</p>
+        </section>
+
+        <section class="results-section hidden" id="resultsSection">
+            <div class="results-grid">
+                
+                <!-- Trust Score Panel -->
+                <div class="panel trust-panel">
+                    <h2>Trust Score</h2>
+                    <div class="score-circle">
+                        <svg viewBox="0 0 36 36" class="circular-chart">
+                            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="circle" id="scoreCircle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <text x="18" y="20.35" class="percentage" id="scoreText">0%</text>
+                        </svg>
+                    </div>
+                    <p class="verdict" id="verdictText">Evaluating...</p>
+                </div>
+
+                <!-- Analysis Breakdown Panel -->
+                <div class="panel details-panel">
+                    <h2>Forensic Breakdown</h2>
+                    
+                    <div class="breakdown-item">
+                        <div class="breakdown-header">
+                            <span>Visual Artifacts (ViT)</span>
+                            <span class="badge danger" id="videoStatus">Manipulated</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress" style="width: 85%; background: #ff4757;"></div></div>
+                    </div>
+
+                    <div class="breakdown-item">
+                        <div class="breakdown-header">
+                            <span>Audio Spectrum Analysis</span>
+                            <span class="badge success" id="audioStatus">Authentic</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress" style="width: 12%; background: #2ed573;"></div></div>
+                    </div>
+
+                    <div class="heatmap-container">
+                        <p class="heatmap-title">Manipulation Heatmap</p>
+                        <div class="heatmap-visual"></div>
+                    </div>
+
+                    <button class="btn-secondary" id="resetBtn">Verify Another File</button>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
